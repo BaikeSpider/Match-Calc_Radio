@@ -30,6 +30,8 @@ class SpiderMain(object):
         while i < l:
             templist.append(0)
             i += 1
+        df['offical editors'] = templist
+        df['offical edits'] = templist
         df['edits radio'] = templist
         df['editors radio'] = templist
         i = 0
@@ -57,6 +59,8 @@ class SpiderMain(object):
                     jj += 1
                 edits_radio = oa_count / total_edits * 100
                 editors_radio = oa_number_count / total_editors * 100
+                df['offical editors'][i] = oa_number_count
+                df['offical edits'][i] = oa_count
                 df['edits radio'][i] = str(edits_radio)
                 df['editors radio'][i] = str(editors_radio)
                 bb = pandas.ExcelWriter('wiki_output.xlsx')

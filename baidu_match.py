@@ -86,13 +86,23 @@ class SpiderMain(object):
            i += 1
         i = 0
         df['distance0'] = templist
-        df['13'] = templist
-        df['14'] = templist
-        df['15'] = templist
-        df['16'] = templist
-        df['17'] = templist
-        df['18'] = templist
+        df['distance1'] = templist
+        df['distance2'] = templist
+        df['distance3'] = templist
+        df['intersection4'] = templist
+        df['union4'] = templist
+        df['distance4'] = templist
+        df['intersection5'] = templist
+        df['union5'] = templist
+        df['distance5'] = templist
+        df['intersection6'] = templist
+        df['union6'] = templist
+        df['distance6'] = templist
+        df['intersection7'] = templist
+        df['union7'] = templist
         df['distance7'] = templist
+
+
         while i<l:
           title = df[0][i]
           filename = 'baidu_' + title + '_intext.xlsx'
@@ -109,13 +119,13 @@ class SpiderMain(object):
              #df.loc[:, '14'][i] = 0
              #df.loc[:, '15'][i] = 0
             if title in branch1_set:
-                df.loc[:, '13'][i] = 1
+                df.loc[:, 'distance1'][i] = 1
             else:
               count1 = self.check_branch(branch2, title)
               if count1 >0:
                #df.loc[:, '12'][i] = 0
                #df.loc[:, '13'][i] = 0
-                df.loc[:, '14'][i] = count1
+                df.loc[:, 'distance2'][i] = count1
                #df.loc[:, '15'][i] = 0
               else:
                 count1 = self.check_branch(branch3, title)
@@ -123,7 +133,7 @@ class SpiderMain(object):
                  #df.loc[:, '12'][i] = 0
                  #df.loc[:, '13'][i] = 0
                  #df.loc[:, '14'][i] = 0
-                  df.loc[:, '15'][i] = count1
+                  df.loc[:, 'distance3'][i] = count1
                #else:
                #  df['12'][i] = 0
                #  df['13'][i] = 0
@@ -146,16 +156,28 @@ class SpiderMain(object):
                 ii += 1
             new_set = random_set & o_set
             if len(new_set) > 0:
-                df.loc[:, '16'][i] = 1
+                df.loc[:, 'distance4'][i] = 1
+            df.loc[:, 'intersection4'][i] = len(new_set)
+            df.loc[:, 'union4'][i] = len(random_set | o_set)
+
             new_set = random_set & branch1_set
             if len(new_set) > 0:
-                df.loc[:, '17'][i] = str(len(new_set) / len(random_set | branch1_set))
+                df.loc[:, 'distance5'][i] = str(len(new_set) / len(random_set | branch1_set))
+            df.loc[:, 'intersection5'][i] = len(new_set)
+            df.loc[:, 'union5'][i] = len(random_set | branch1_set)
+
             new_set = random_set & branch2_set
             if len(new_set) > 0:
-                df.loc[:, '18'][i] = str(len(new_set) / len(random_set | branch2_set))
+                df.loc[:, 'distance6'][i] = str(len(new_set) / len(random_set | branch2_set))
+            df.loc[:, 'intersection6'][i] = len(new_set)
+            df.loc[:, 'union6'][i] = len(random_set | branch2_set)
+
             new_set = random_set & branch3_set
             if len(new_set) > 0:
                 df.loc[:, 'distance7'][i] = str(len(new_set) / len(random_set | branch3_set))
+            df.loc[:, 'intersection7'][i] = len(new_set)
+            df.loc[:, 'union7'][i] = len(random_set | branch3_set)
+
           i += 1
           bb = pandas.ExcelWriter('baidu_output.xlsx')
           df.to_excel(bb)
