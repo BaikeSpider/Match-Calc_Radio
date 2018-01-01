@@ -39,6 +39,8 @@ class SpiderMain(object):
             title = df[0][i]
             total_editors = df[5][i]
             total_edits = df[4][i]
+            total_editors = int(total_editors)
+            total_edits = int(total_edits)
             filename = 'wiki_' + title + '.xlsx'
             edits_radio = 0
             editors_radio = 0

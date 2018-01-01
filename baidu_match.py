@@ -105,6 +105,7 @@ class SpiderMain(object):
 
         while i<l:
           title = df[0][i]
+          title = str(title)
           filename = 'baidu_' + title + '_intext.xlsx'
           if title == '政治':
             df.loc[:, 'distance0'][i] = 1
